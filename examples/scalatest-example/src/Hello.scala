@@ -1,3 +1,5 @@
+package cbt.scalatest
+
 object Main extends App{
 
   println("Hello World")

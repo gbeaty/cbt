@@ -226,19 +226,21 @@ trait BaseBuild extends BuildInterface with DependencyImplementation with SbtDep
     }
   }
 
+  val testDirectory = projectDirectory / "test"
+  /*def testBuild = new BasicBuild( context.copy(workingDirectory = testDirectory) ){
+    override def dependencies = Seq(
+      DirectoryDependency(testDirectory++"/..")
+    )
+    def apply = run
+  }
   def test: Dependency = {
-    val testDirectory = projectDirectory / "test"
     if( (testDirectory / lib.buildDirectoryName / lib.buildFileName).exists ){
       DirectoryDependency( testDirectory ).dependency
     } else {
-      new BasicBuild( context.copy(workingDirectory = testDirectory) ){
-        override def dependencies = Seq(
-          DirectoryDependency(projectDirectory++"/..")
-        )
-        def apply = run
-      }
+      testBuild
     }
-  }
+  }*/
+  def test = DirectoryDependency( testDirectory ).dependency
 
   def t: Any = lib.callReflective( test, Some("run"), context )
   def rt = recursiveUnsafe(Some("test.run"))
